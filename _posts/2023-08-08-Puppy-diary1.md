@@ -2,6 +2,7 @@
 layout: post
 title: "小狗日记1"
 date: 2023-08-08
+tags: [lifestyle, puppy]
 ---
 
 小狗来到我们在南特的家已经一个半月多了，是时候给她写一篇小文了。

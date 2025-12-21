@@ -60,3 +60,13 @@ ul.posts {
 ul.posts li {
     list-style: none;
 }
+
+.meta {
+    color: #666;
+    font-size: 0.9em;
+}
+
+.meta a {
+    color: #ee4b3e;
+    font-weight: bold;
+}

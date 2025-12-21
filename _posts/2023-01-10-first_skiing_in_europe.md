@@ -2,6 +2,7 @@
 layout: post
 title: "第一次在欧洲滑雪"
 date: 2023-01-10
+tags: [skiing, travel]
 ---
 
 2022 年年底，终于完成了我在法国七年多的第一次滑雪。

@@ -2,6 +2,7 @@
 layout: post
 title: "二十四岁，新的博客"
 date: 2020-09-22
+tags: [tech, blogging]
 ---
 好像程序员都得有个博客。我之前的博客是 wordpress.com 的（注意不是 wordpress.org，不用自己建站，完全是和新浪博客差不多的东西），实在是不太拿的出手，于是就随大流用 Jekyll 和 Github Pages 搞了个静态博客。之前看到一些不错的主题，想取而用之但总是遇到一些奇奇怪怪的问题，索性就从默认的 minima 主题开始好了，之后可能会慢慢改动吧，不过相比用 wordpress 从前台到后台一整套实在是方便太多了。
 
