@@ -15,14 +15,16 @@ permalink: /tags
 
 <div class="tag-cloud">
     {% for tag in sorted_tags %}
-    <a href="#{{ tag }}" style="margin-right: 15px; font-weight: bold;">{{ tag }} ({{ site.tags[tag] | size }})</a>
+    {% assign tag_name = site.data.tags[tag] | default: tag %}
+    <a href="#{{ tag }}" style="margin-right: 15px; font-weight: bold;">{{ tag_name }} ({{ site.tags[tag] | size }})</a>
     {% endfor %}
 </div>
 
 <hr>
 
 {% for tag in sorted_tags %}
-<h2 id="{{ tag }}">{{ tag }}</h2>
+{% assign tag_name = site.data.tags[tag] | default: tag %}
+<h2 id="{{ tag }}">{{ tag_name }}</h2>
 <ul class="posts">
     {% for post in site.tags[tag] %}
     <li>
