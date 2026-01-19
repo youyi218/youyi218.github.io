@@ -1,59 +1,126 @@
 body {
     margin: 60px auto;
     width: 70%;
-    background-color:#f2f2f3;
+    background-color: #f2f2f3;
 }
+
 nav {
     background-color: #ee4b3e;
 }
-hr{
-    border-top: 2px;
-    border-color: #E9BC1B;
+
+hr {
+    border: none;
+    text-align: center;
+    margin: 40px 0;
 }
-nav ul, footer ul {
-    font-family:'Helvetica', 'Arial', 'Sans-Serif';
+
+hr:after {
+    content: "· · ·";
+    font-size: 24px;
+    color: #E9BC1B;
+    letter-spacing: 12px;
+}
+
+nav ul,
+footer ul {
+    font-family: 'Helvetica', 'Arial', 'Sans-Serif';
     padding: 0px;
     list-style: none;
     font-weight: bold;
 }
-nav ul li, footer ul li {
+
+nav ul li,
+footer ul li {
     display: inline;
     margin-right: 20px;
 }
+
 a {
     text-decoration: none;
     color: #333333;
 }
+
 a:hover {
     text-decoration: underline;
 }
+
 h1 {
     font-size: 3em;
-    font-family:'Helvetica', 'Arial', 'Sans-Serif';
+    font-family: 'Helvetica', 'Arial', 'Sans-Serif';
     color: #1FDA9A
 }
+
 h2 {
     font-size: 2em;
-    font-family:'Helvetica', 'Arial', 'Sans-Serif';
+    font-family: 'Helvetica', 'Arial', 'Sans-Serif';
     color: #1FDA9A
 }
+
 h3 {
     font-size: 1.5em;
-    font-family:'Helvetica', 'Arial', 'Sans-Serif';
+    font-family: 'Helvetica', 'Arial', 'Sans-Serif';
     color: #333333;
 }
+
 p {
     font-size: 1.2em;
     line-height: 1.5em;
     color: #333;
 }
+
 footer {
     border-top: 1px solid #E9BC1B;
     font-size: .8em;
 }
 
-ul.posts { 
-    margin: 20px auto 40px; 
+.post-preview {
+    margin-bottom: 100px;
+    padding-bottom: 60px;
+    position: relative;
+}
+
+.post-preview:after {
+    content: "";
+    position: absolute;
+    bottom: 0;
+    left: 20%;
+    right: 20%;
+    height: 1px;
+    background: linear-gradient(to right, transparent, #E9BC1B, transparent);
+}
+
+.post-preview:before {
+    content: "●";
+    position: absolute;
+    bottom: -8px;
+    left: 50%;
+    transform: translateX(-50%);
+    color: #E9BC1B;
+    font-size: 12px;
+    background: #f2f2f3;
+    padding: 0 10px;
+}
+
+.post-preview:last-of-type {
+    margin-bottom: 60px;
+}
+
+.post-preview:last-of-type:after,
+.post-preview:last-of-type:before {
+    display: none;
+}
+
+.post-preview h2 {
+    margin-top: 0;
+    transition: color 0.3s ease;
+}
+
+.post-preview h2:hover {
+    color: #16c48a;
+}
+
+ul.posts {
+    margin: 20px auto 40px;
     font-size: 1.5em;
 }
 
