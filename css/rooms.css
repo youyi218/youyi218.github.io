@@ -1,0 +1,50 @@
+.rooms-intro {
+    margin-bottom: 28px;
+}
+
+.rooms-help,
+.room-download {
+    font-size: 0.95em;
+    color: #666;
+}
+
+.rooms-list {
+    display: grid;
+    gap: 40px;
+    margin: 28px 0 48px;
+}
+
+.room {
+    min-width: 0;
+}
+
+.room h2 {
+    margin-top: 0;
+}
+
+.room model-viewer {
+    display: block;
+    width: 100%;
+    height: clamp(300px, 60vh, 620px);
+    background: #e8e8e9;
+    border-radius: 12px;
+}
+
+.room-download a {
+    text-decoration: underline;
+}
+
+.rooms-empty {
+    margin: 48px 0 64px;
+    color: #666;
+}
+
+@media (max-width: 600px) {
+    .rooms h1 {
+        font-size: 2.2em;
+    }
+
+    .room model-viewer {
+        height: 360px;
+    }
+}

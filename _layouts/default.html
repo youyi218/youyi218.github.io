@@ -3,9 +3,16 @@
 
 <head>
 	<title>{{ page.title }}</title>
+	<meta name="viewport" content="width=device-width, initial-scale=1">
 	<!-- link to main stylesheet -->
-	<link rel="stylesheet" type="text/css" href="/css/main.css">
+	<link rel="stylesheet" type="text/css" href="{{ '/css/main.css' | relative_url }}?v={{ site.time | date: '%s' }}">
 	<link rel="shortcut icon" type="image/x-icon" href="/favicon.ico">
+	{% if page.room_gallery %}
+	<link rel="stylesheet" href="{{ '/css/rooms.css' | relative_url }}?v={{ site.time | date: '%s' }}">
+	{% if site.data.rooms.size > 0 %}
+	<script type="module" src="https://ajax.googleapis.com/ajax/libs/model-viewer/4.4.0/model-viewer.min.js"></script>
+	{% endif %}
+	{% endif %}
 </head>
 
 <body>
@@ -13,6 +20,7 @@
 		<ul>
 			<li><a href="/">主页</a></li>
 			<li><a href="/about">关于</a></li>
+			<li><a href="{{ '/rooms/' | relative_url }}">我的房间们</a></li>
 			<!-- <li><a href="/cv">CV</a></li> -->
 			<li><a href="/blog">所有文章</a></li>
 			<li><a href="/tags">标签</a></li>

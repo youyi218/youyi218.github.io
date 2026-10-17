@@ -1,0 +1,4 @@
+# Add one entry per room after placing its GLB file in assets/models/.
+- title: 房间 01
+  model: /assets/models/room-01.glb
+  camera_orbit: 40deg 55deg auto

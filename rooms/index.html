@@ -1,0 +1,36 @@
+---
+layout: default
+title: 我的房间们
+room_gallery: true
+permalink: /rooms/
+---
+<section class="rooms">
+  <h1>{{ page.title }}</h1>
+  <p class="rooms-intro">把住过的小房间，一个个收藏在这里。</p>
+
+  {% if site.data.rooms.size > 0 %}
+  <p class="rooms-help">拖动旋转，滚轮缩放；手机上用手指拖动、双指缩放。</p>
+  <div class="rooms-list">
+    {% for room in site.data.rooms %}
+    <article class="room">
+      <h2>{{ room.title | escape }}</h2>
+      {% if room.description %}
+      <p>{{ room.description | escape }}</p>
+      {% endif %}
+      <model-viewer
+        src="{{ room.model | relative_url | escape }}"
+        alt="{{ room.title | escape }}的三维模型"
+        camera-orbit="{{ room.camera_orbit | default: '40deg 55deg auto' | escape }}"
+        camera-controls
+        touch-action="pan-y"
+        loading="lazy"
+        shadow-intensity="1">
+      </model-viewer>
+      <p class="room-download"><a href="{{ room.model | relative_url | escape }}" download>下载这个房间的模型</a></p>
+    </article>
+    {% endfor %}
+  </div>
+  {% else %}
+  <p class="rooms-empty">第一个小房间，正在整理中。</p>
+  {% endif %}
+</section>
