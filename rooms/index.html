@@ -18,15 +18,17 @@ permalink: /rooms/
       <p>{{ room.description | escape }}</p>
       {% endif %}
       <model-viewer
-        src="{{ room.model | relative_url | escape }}"
+        src="{{ room.model | relative_url | escape }}?v={{ site.time | date: '%s' }}"
         alt="{{ room.title | escape }}的三维模型"
         camera-orbit="{{ room.camera_orbit | default: '40deg 55deg auto' | escape }}"
+        camera-target="{{ room.camera_target | default: 'auto auto auto' | escape }}"
+        {% if room.min_camera_orbit %}min-camera-orbit="{{ room.min_camera_orbit | escape }}"{% endif %}
         camera-controls
         touch-action="pan-y"
         loading="lazy"
         shadow-intensity="1">
       </model-viewer>
-      <p class="room-download"><a href="{{ room.model | relative_url | escape }}" download>下载这个房间的模型</a></p>
+      <p class="room-download"><a href="{{ room.model | relative_url | escape }}?v={{ site.time | date: '%s' }}" download>下载这个房间的模型</a></p>
     </article>
     {% endfor %}
   </div>
