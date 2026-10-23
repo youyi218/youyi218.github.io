@@ -16,3 +16,6 @@
 - title: 房间 05
   model: /assets/models/room-05.glb
   camera_orbit: 36deg 58deg auto
+- title: 房间 06
+  model: /assets/models/room-06.glb
+  camera_orbit: 31deg 61deg auto
