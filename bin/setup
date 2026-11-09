@@ -1,0 +1,15 @@
+#!/usr/bin/env bash
+set -euo pipefail
+
+source "$(cd "$(dirname "${BASH_SOURCE[0]}")" && pwd)/ruby-env"
+cd "${repo_root}"
+
+if ! gem list --installed --exact bundler --version "${bundler_version}" >/dev/null 2>&1; then
+  gem install bundler --version "${bundler_version}" --no-document
+fi
+
+bundle "_${bundler_version}_" config set --local path vendor/bundle
+bundle "_${bundler_version}_" install
+
+echo
+echo "Setup complete. Start the preview with: ./bin/preview"

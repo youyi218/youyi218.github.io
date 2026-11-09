@@ -1,37 +1,48 @@
-## Welcome to GitHub Pages
+# youyi.name
 
-You can use the [editor on GitHub](https://github.com/youyi218/youyi218.github.io/edit/master/README.md) to maintain and preview the content for your website in Markdown files.
+This is the Jekyll source for [youyi.name](https://youyi.name), hosted with GitHub Pages.
 
-Whenever you commit to this repository, GitHub Pages will run [Jekyll](https://jekyllrb.com/) to rebuild the pages in your site, from the content in your Markdown files.
+## Local preview
 
-### Markdown
+The site uses Ruby 3.3, matching the GitHub Actions deployment environment.
 
-Markdown is a lightweight and easy-to-use syntax for styling your writing. It includes conventions for
+First-time setup on macOS:
 
-```markdown
-Syntax highlighted code block
-
-# Header 1
-## Header 2
-### Header 3
-
-- Bulleted
-- List
-
-1. Numbered
-2. List
-
-**Bold** and _Italic_ and `Code` text
-
-[Link](url) and ![Image](src)
+```bash
+brew install ruby@3.3
+./bin/setup
 ```
 
-For more details see [GitHub Flavored Markdown](https://guides.github.com/features/mastering-markdown/).
+Start the local preview:
 
-### Jekyll Themes
+```bash
+./bin/preview
+```
 
-Your Pages site will use the layout and styles from the Jekyll theme you have selected in your [repository settings](https://github.com/youyi218/youyi218.github.io/settings). The name of this theme is saved in the Jekyll `_config.yml` configuration file.
+Open <http://127.0.0.1:4000>. The browser refreshes automatically when a source file changes. Press `Ctrl+C` to stop the server.
 
-### Support or Contact
+To check the same production build used for deployment:
 
-Having trouble with Pages? Check out our [documentation](https://docs.github.com/categories/github-pages-basics/) or [contact support](https://github.com/contact) and we’ll help you sort it out.
+```bash
+./bin/build
+```
+
+If port 4000 is busy, choose another one:
+
+```bash
+PORT=4001 ./bin/preview
+```
+
+## Publish
+
+The workflow in `.github/workflows/jekyll.yml` deploys every push to `master`. After reviewing the local preview:
+
+```bash
+git add <changed-files>
+git commit -m "Describe the change"
+git push origin master
+```
+
+This assumes **Settings → Pages → Build and deployment → Source** is set to **GitHub Actions**, as required by the repository's deployment workflow.
+
+Then check the repository's **Actions** tab. When the `Deploy Jekyll with GitHub Pages dependencies preinstalled` workflow succeeds, the update is live at [youyi.name](https://youyi.name). If work was done on another branch, merge it into `master` first; pushing only that other branch will not deploy.

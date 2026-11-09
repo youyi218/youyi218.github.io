@@ -1,0 +1,21 @@
+#!/usr/bin/env bash
+set -euo pipefail
+
+source "$(cd "$(dirname "${BASH_SOURCE[0]}")" && pwd)/ruby-env"
+cd "${repo_root}"
+
+if ! gem list --installed --exact bundler --version "${bundler_version}" >/dev/null 2>&1; then
+  echo "Dependencies are not ready. Run: ./bin/setup" >&2
+  exit 1
+fi
+
+bundle "_${bundler_version}_" check >/dev/null || {
+  echo "Dependencies changed. Run: ./bin/setup" >&2
+  exit 1
+}
+
+exec bundle "_${bundler_version}_" exec jekyll serve \
+  --disable-disk-cache \
+  --livereload \
+  --host 127.0.0.1 \
+  --port "${PORT:-4000}"

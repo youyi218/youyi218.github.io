@@ -10,7 +10,9 @@
 	{% if page.room_gallery %}
 	<link rel="stylesheet" href="{{ '/css/rooms.css' | relative_url }}?v={{ site.time | date: '%s' }}">
 	{% if site.data.rooms.size > 0 %}
-	<script type="module" src="https://ajax.googleapis.com/ajax/libs/model-viewer/4.4.0/model-viewer.min.js"></script>
+	<script defer src="{{ '/js/room-lighting.js' | relative_url }}?v={{ site.time | date: '%s' }}"></script>
+	<script defer src="{{ '/js/baked-room-lighting.js' | relative_url }}?v={{ site.time | date: '%s' }}"></script>
+	<script defer src="{{ '/js/rooms.js' | relative_url }}?v={{ site.time | date: '%s' }}"></script>
 	{% endif %}
 	{% endif %}
 </head>

@@ -9,7 +9,8 @@ permalink: /rooms/
   <p class="rooms-intro">把住过的小房间，一个个收藏在这里。</p>
 
   {% if site.data.rooms.size > 0 %}
-  <p class="rooms-help">拖动旋转，滚轮缩放；手机上用手指拖动、双指缩放。</p>
+  <p class="rooms-help">点击封面打开 3D 房间。拖动旋转，滚轮缩放；手机上用手指拖动、双指缩放。</p>
+  <noscript><p>打开 3D 房间需要启用 JavaScript，也可以通过下方链接下载模型。</p></noscript>
   <div class="rooms-list">
     {% for room in site.data.rooms %}
     <article class="room">
@@ -17,17 +18,71 @@ permalink: /rooms/
       {% if room.description %}
       <p>{{ room.description | escape }}</p>
       {% endif %}
-      <model-viewer
-        src="{{ room.model | relative_url | escape }}?v={{ site.time | date: '%s' }}"
-        alt="{{ room.title | escape }}的三维模型"
-        camera-orbit="{{ room.camera_orbit | default: '40deg 55deg auto' | escape }}"
-        camera-target="{{ room.camera_target | default: 'auto auto auto' | escape }}"
-        {% if room.min_camera_orbit %}min-camera-orbit="{{ room.min_camera_orbit | escape }}"{% endif %}
-        camera-controls
-        touch-action="pan-y"
-        loading="lazy"
-        shadow-intensity="1">
-      </model-viewer>
+      <div class="room-stage"
+        id="room-view-{{ forloop.index }}"
+        data-model="{{ room.model | relative_url | escape }}?v={{ site.time | date: '%s' }}"
+        {% if room.lighting %}data-lighting="{{ room.lighting | relative_url | escape }}"{% endif %}
+        data-title="{{ room.title | escape }}"
+        data-camera-orbit="{{ room.camera_orbit | default: '40deg 55deg auto' | escape }}"
+        data-camera-target="{{ room.camera_target | default: 'auto auto auto' | escape }}"
+        {% if room.min_camera_orbit %}data-min-camera-orbit="{{ room.min_camera_orbit | escape }}"{% endif %}>
+        <button class="room-open" type="button" aria-label="打开{{ room.title | escape }}的 3D 模型" aria-expanded="false" aria-controls="room-view-{{ forloop.index }}">
+          <img class="room-cover" src="{{ room.cover | relative_url | escape }}" alt="{{ room.title | escape }}的封面" {% unless forloop.first %}loading="lazy"{% endunless %} decoding="async">
+          <span class="room-open-label">点击探索 3D 房间</span>
+        </button>
+      </div>
+      <div class="room-controls">
+        <button class="room-close" type="button" hidden>返回封面</button>
+        <button class="room-lighting" type="button" aria-expanded="false" aria-controls="room-lighting-{{ forloop.index }}" hidden>光照设置</button>
+        <span class="room-status" role="status" aria-live="polite"></span>
+      </div>
+      <fieldset class="room-light-panel" id="room-lighting-{{ forloop.index }}" hidden>
+        <legend>{{ room.title | escape }}的光照</legend>
+        {% if room.lighting %}
+        <div class="room-baked-presets" role="group" aria-label="照明场景"></div>
+        <p class="room-light-hint">白天的窗光、工作的灯光，或床边的阅读时光。</p>
+        {% else %}
+        <div class="room-light-grid">
+          <label>光照预设
+            <select class="room-light-preset">
+              <option value="soft">柔和</option>
+              <option value="bright">明亮</option>
+              <option value="custom">自定义</option>
+            </select>
+          </label>
+          <label for="light-azimuth-{{ forloop.index }}">主光方向
+            <select id="light-azimuth-{{ forloop.index }}" class="room-light-input" data-setting="azimuth">
+              <option value="-135">左后方</option>
+              <option value="-45" selected>左前方</option>
+              <option value="0">正前方</option>
+              <option value="45">右前方</option>
+              <option value="135">右后方</option>
+              <option value="180">正后方</option>
+            </select>
+          </label>
+          <label for="light-elevation-{{ forloop.index }}">主光高度
+            <select id="light-elevation-{{ forloop.index }}" class="room-light-input" data-setting="elevation">
+              <option value="20">低位 · 20°</option>
+              <option value="50" selected>中位 · 50°</option>
+              <option value="80">顶部 · 80°</option>
+            </select>
+          </label>
+          <label for="light-temperature-{{ forloop.index }}">色温
+            <select id="light-temperature-{{ forloop.index }}" class="room-light-input" data-setting="temperature">
+              <option value="2700">2700 K · 暖黄</option>
+              <option value="3200">3200 K · 暖白</option>
+              <option value="4500" selected>4500 K · 自然</option>
+              <option value="6500">6500 K · 日光</option>
+              <option value="8000">8000 K · 冷白</option>
+            </select>
+          </label>
+          <label for="light-intensity-{{ forloop.index }}">亮度 <output class="room-light-value" for="light-intensity-{{ forloop.index }}">85%</output>
+            <input id="light-intensity-{{ forloop.index }}" class="room-light-input" data-setting="intensity" type="range" min="0.4" max="1.6" step="0.05" value="0.85">
+          </label>
+        </div>
+        <p class="room-light-hint">调整任一参数即启用自定义光照。方向以房间为参照；低色温偏暖，高色温偏冷。</p>
+        {% endif %}
+      </fieldset>
       <p class="room-download"><a href="{{ room.model | relative_url | escape }}?v={{ site.time | date: '%s' }}" download>下载这个房间的模型</a></p>
     </article>
     {% endfor %}

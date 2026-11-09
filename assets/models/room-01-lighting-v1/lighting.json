@@ -1,0 +1,29 @@
+{
+  "version": 1,
+  "model": "room-01.glb",
+  "default": "day",
+  "textureType": "bakedAppearance",
+  "materials": [
+    "Room01_Baked_opaque",
+    "Room01_Baked_glass",
+    "Room01_Baked_cutout"
+  ],
+  "uvSet": 0,
+  "colorSpace": "srgb",
+  "toneMapping": "none",
+  "exposure": 1,
+  "presets": {
+    "day": {
+      "label": "白天",
+      "texture": "day.png"
+    },
+    "work": {
+      "label": "工作",
+      "texture": "work.png"
+    },
+    "read": {
+      "label": "阅读",
+      "texture": "read.png"
+    }
+  }
+}

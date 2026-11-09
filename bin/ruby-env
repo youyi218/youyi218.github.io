@@ -1,0 +1,36 @@
+#!/usr/bin/env bash
+
+# Shared Ruby setup for the local Jekyll commands.
+repo_root="$(cd "$(dirname "${BASH_SOURCE[0]}")/.." && pwd)"
+
+for ruby_dir in \
+  /opt/homebrew/opt/ruby@3.3/bin \
+  /usr/local/opt/ruby@3.3/bin \
+  /opt/homebrew/opt/ruby/bin \
+  /usr/local/opt/ruby/bin
+do
+  if [ -x "${ruby_dir}/ruby" ]; then
+    export PATH="${ruby_dir}:${PATH}"
+    break
+  fi
+done
+
+if ! command -v ruby >/dev/null 2>&1; then
+  echo "Ruby was not found. Install it with: brew install ruby@3.3" >&2
+  exit 1
+fi
+
+if ! ruby -e 'exit Gem::Version.new(RUBY_VERSION) >= Gem::Version.new("3.2")' 2>/dev/null; then
+  echo "Ruby 3.2 or newer is required (Ruby 3.3 matches GitHub Pages)." >&2
+  echo "Install it with: brew install ruby@3.3" >&2
+  exit 1
+fi
+
+bundler_version="$(awk '/^BUNDLED WITH$/{getline; gsub(/^[[:space:]]+|[[:space:]]+$/, ""); print; exit}' "${repo_root}/Gemfile.lock")"
+
+if [ -z "${bundler_version}" ]; then
+  echo "Could not read the Bundler version from Gemfile.lock." >&2
+  exit 1
+fi
+
+export repo_root bundler_version
