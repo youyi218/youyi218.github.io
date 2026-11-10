@@ -1,7 +1,7 @@
 # Add a GLB in assets/models/ and a transparent cover exported from the same GLB in assets/images/rooms/.
 - title: 房间 01
-  model: /assets/models/room-01-lighting-v1/room-01.glb
-  lighting: /assets/models/room-01-lighting-v1/lighting.json
+  model: /assets/models/room-01-lighting-v2/room-01.glb
+  lighting: /assets/models/room-01-lighting-v2/lighting.json
   cover: /assets/images/rooms/room-01-4dee76b6-baked.webp
   camera_orbit: 40deg 55deg auto
 - title: 房间 02

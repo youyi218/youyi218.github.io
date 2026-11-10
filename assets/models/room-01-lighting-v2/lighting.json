@@ -15,15 +15,15 @@
   "presets": {
     "day": {
       "label": "白天",
-      "texture": "day.png"
+      "texture": "day.webp"
     },
     "work": {
       "label": "工作",
-      "texture": "work.png"
+      "texture": "work.webp"
     },
     "read": {
       "label": "阅读",
-      "texture": "read.png"
+      "texture": "read.webp"
     }
   }
 }
